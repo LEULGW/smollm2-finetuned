@@ -1,0 +1,100 @@
+{"id": "test_001", "prediction": {"spans": [], "has_sensitive_info": false}}
+{"id": "test_002", "prediction": {"spans": [{"text": "Buy most of my groceries at Costco every two weeks", "category": "SHOPPING_BEHAVIOR"}], "has_sensitive_info": true}}
+{"id": "test_003", "prediction": {"spans": [], "has_sensitive_info": false}}
+{"id": "test_004", "prediction": {"spans": [{"text": "102.88.14.203", "category": "IP_ADDRESS"}, {"text": "my public IP is 102.88.14.203", "category": "IP_ADDRESS"}], "has_sensitive_info": true}}
+{"id": "test_005", "prediction": {"spans": [{"text": "Linh", "category": "PERSON_NAME"}, {"text": "27", "category": "AGE"}], "has_sensitive_info": true}}
+{"id": "test_006", "prediction": {"spans": [], "has_sensitive_info": false}}
+{"id": "test_007", "prediction": {"spans": [{"text": "VR-20931877", "category": "VEHICLE_REGISTRATION_NUMBER"}], "has_sensitive_info": true}}
+{"id": "test_008", "prediction": {"spans": [], "has_sensitive_info": false}}
+{"id": "test_009", "prediction": {"spans": [{"text": "purple yam dessert", "category": "SHOPPING_BEHAVIOR"}], "has_sensitive_info": true}}
+{"id": "test_010", "prediction": {"spans": [{"text": "555-1076", "category": "CELL_PHONE_NUMBER"}], "has_sensitive_info": true}}
+{"id": "test_011", "prediction": {"spans": [{"text": "bluemeadow_vn", "category": "HOMETOWN"}], "has_sensitive_info": true}}
+{"id": "test_012", "prediction": {"spans": [{"text": "5'9", "category": "HEIGHT"}], "has_sensitive_info": true}}
+{"id": "test_013", "prediction": {"spans": [{"text": "Tuyet", "category": "PERSON_NAME"}], "has_sensitive_info": true}}
+{"id": "test_014", "prediction": {"spans": [{"text": "702 Saffron Field Rd", "category": "HOME_ADDRESS"}], "has_sensitive_info": true}}
+{"id": "test_015", "prediction": {"spans": [], "has_sensitive_info": false}}
+{"id": "test_016", "prediction": {"spans": [{"text": "52", "category": "AGE"}], "has_sensitive_info": true}}
+{"id": "test_017", "prediction": {"spans": [], "has_sensitive_info": false}}
+{"id": "test_018", "prediction": {"spans": [{"text": "Catholic", "category": "RELIGION"}], "has_sensitive_info": true}}
+{"id": "test_019", "prediction": {"spans": [{"text": "bisexual", "category": "SEXUAL_PREFERENCE"}], "has_sensitive_info": true}}
+{"id": "test_020", "prediction": {"spans": [], "has_sensitive_info": false}}
+{"id": "test_021", "prediction": {"spans": [{"text": "29", "category": "AGE"}, {"text": "type 2 diabetes", "category": "MEDICAL_HISTORY"}, {"text": "500 mg twice a day", "category": "METFORMIN_PLATE_NUMBER"}], "has_sensitive_info": true}}
+{"id": "test_022", "prediction": {"spans": [{"text": "14 Amber Meadow Lane", "category": "HOME_ADDRESS"}], "has_sensitive_info": true}}
+{"id": "test_023", "prediction": {"spans": [], "has_sensitive_info": false}}
+{"id": "test_024", "prediction": {"spans": [], "has_sensitive_info": false}}
+{"id": "test_025", "prediction": {"spans": [{"text": "2 kids", "category": "NUMBER_OF_CHILDREN"}], "has_sensitive_info": true}}
+{"id": "test_026", "prediction": {"spans": [{"text": "WDL7Q2M41X9B", "category": "DRIVERS_LICENSE_NUMBER"}], "has_sensitive_info": true}}
+{"id": "test_027", "prediction": {"spans": [], "has_sensitive_info": false}}
+{"id": "test_028", "prediction": {"spans": [], "has_sensitive_info": false}}
+{"id": "test_029", "prediction": {"spans": [{"text": "KDM 482Q", "category": "LICENSE_PLATE_NUMBER"}], "has_sensitive_info": true}}
+{"id": "test_030", "prediction": {"spans": [], "has_sensitive_info": false}}
+{"id": "test_031", "prediction": {"spans": [{"text": "warehouse shift lead", "category": "JOB_TITLE"}, {"text": "maricel.dc.works@gmail.com", "category": "WORK_CONTACT_INFORMATION"}], "has_sensitive_info": true}}
+{"id": "test_032", "prediction": {"spans": [{"text": "WXH-884-20917", "category": "HEALTH_INSURANCE_ID"}, {"text": "Knee surgery", "category": "MEDICAL_HISTORY"}], "has_sensitive_info": true}}
+{"id": "test_033", "prediction": {"spans": [{"text": "Muslim", "category": "RELIGION"}, {"text": "one has a severe peanut allergy", "category": "MEDICAL_HISTORY"}], "has_sensitive_info": true}}
+{"id": "test_034", "prediction": {"spans": [], "has_sensitive_info": false}}
+{"id": "test_035", "prediction": {"spans": [], "has_sensitive_info": false}}
+{"id": "test_036", "prediction": {"spans": [{"text": "$3,800", "category": "INCOME_LEVEL"}], "has_sensitive_info": true}}
+{"id": "test_037", "prediction": {"spans": [{"text": "1800 Indigo Meadow Pkwy, Suite 300", "category": "HOME_ADDRESS"}], "has_sensitive_info": true}}
+{"id": "test_038", "prediction": {"spans": [{"text": "192.168.10.47", "category": "IP_ADDRESS"}], "has_sensitive_info": true}}
+{"id": "test_039", "prediction": {"spans": [], "has_sensitive_info": false}}
+{"id": "test_040", "prediction": {"spans": [{"text": "Kiprono", "category": "PERSON_NAME"}], "has_sensitive_info": true}}
+{"id": "test_041", "prediction": {"spans": [], "has_sensitive_info": false}}
+{"id": "test_042", "prediction": {"spans": [{"text": "41 year old", "category": "AGE"}, {"text": "5'7\"", "category": "HEIGHT"}, {"text": "198 lbs", "category": "WEIGHT"}], "has_sensitive_info": true}}
+{"id": "test_043", "prediction": {"spans": [], "has_sensitive_info": false}}
+{"id": "test_044", "prediction": {"spans": [{"text": "-1.3047, 36.7073", "category": "GPS_LOCATION"}], "has_sensitive_info": true}}
+{"id": "test_045", "prediction": {"spans": [], "has_sensitive_info": false}}
+{"id": "test_046", "prediction": {"spans": [], "has_sensitive_info": false}}
+{"id": "test_047", "prediction": {"spans": [], "has_sensitive_info": false}}
+{"id": "test_048", "prediction": {"spans": [{"text": "Achieng", "category": "PERSON_NAME"}], "has_sensitive_info": true}}
+{"id": "test_049", "prediction": {"spans": [], "has_sensitive_info": false}}
+{"id": "test_050", "prediction": {"spans": [], "has_sensitive_info": false}}
+{"id": "test_051", "prediction": {"spans": [], "has_sensitive_info": false}}
+{"id": "test_052", "prediction": {"spans": [{"text": "555-1019", "category": "HOME_PHONE_NUMBER"}], "has_sensitive_info": true}}
+{"id": "test_053", "prediction": {"spans": [{"text": "Nguyen Thi Lan", "category": "PERSON_NAME"}, {"text": "Payroll Specialist", "category": "JOB_TITLE"}], "has_sensitive_info": true}}
+{"id": "test_054", "prediction": {"spans": [{"text": "Mombasa", "category": "HOMETOWN"}, {"text": "14 March 1991", "category": "BIRTH_DATE"}], "has_sensitive_info": true}}
+{"id": "test_055", "prediction": {"spans": [], "has_sensitive_info": false}}
+{"id": "test_056", "prediction": {"spans": [{"text": "Tighten my nursing school personal statement", "category": "SOCIAL_NETWORK_PROFILE"}], "has_sensitive_info": true}}
+{"id": "test_057", "prediction": {"spans": [{"text": "4471", "category": "CREDIT_CARD_NUMBER"}], "has_sensitive_info": true}}
+{"id": "test_058", "prediction": {"spans": [], "has_sensitive_info": false}}
+{"id": "test_059", "prediction": {"spans": [{"text": "PCOS", "category": "MEDICAL_HISTORY"}], "has_sensitive_info": true}}
+{"id": "test_060", "prediction": {"spans": [], "has_sensitive_info": false}}
+{"id": "test_061", "prediction": {"spans": [{"text": "@tuyet.reads", "category": "SOCIAL_NETWORK_PROFILE"}], "has_sensitive_info": true}}
+{"id": "test_062", "prediction": {"spans": [{"text": "603", "category": "CREDIT_SCORE"}], "has_sensitive_info": true}}
+{"id": "test_063", "prediction": {"spans": [], "has_sensitive_info": false}}
+{"id": "test_064", "prediction": {"spans": [], "has_sensitive_info": false}}
+{"id": "test_065", "prediction": {"spans": [], "has_sensitive_info": false}}
+{"id": "test_066", "prediction": {"spans": [], "has_sensitive_info": false}}
+{"id": "test_067", "prediction": {"spans": [{"text": "Mai", "category": "PERSON_NAME"}, {"text": "16", "category": "AGE"}], "has_sensitive_info": true}}
+{"id": "test_068", "prediction": {"spans": [], "has_sensitive_info": false}}
+{"id": "test_069", "prediction": {"spans": [{"text": "resumed signing the petition", "category": "SIGNED_PETITIONS"}, {"text": "67 years old", "category": "AGE"}, {"text": "sports coach", "category": "OCCUPATION"}, {"text": "75", "category": "AGE"}, {"text": "pool", "category": "HOMETOWN"}], "has_sensitive_info": true}}
+{"id": "test_070", "prediction": {"spans": [], "has_sensitive_info": false}}
+{"id": "test_071", "prediction": {"spans": [], "has_sensitive_info": false}}
+{"id": "test_072", "prediction": {"spans": [], "has_sensitive_info": false}}
+{"id": "test_073", "prediction": {"spans": [{"text": "621-40-8873", "category": "SOCIAL_SECURITY_NUMBER"}], "has_sensitive_info": true}}
+{"id": "test_074", "prediction": {"spans": [{"text": "4539 1180 2247 6613", "category": "CREDIT_CARD_NUMBER"}], "has_sensitive_info": true}}
+{"id": "test_075", "prediction": {"spans": [{"text": "4092", "category": "SECURITY_ACCESS_CODE"}], "has_sensitive_info": true}}
+{"id": "test_076", "prediction": {"spans": [], "has_sensitive_info": false}}
+{"id": "test_077", "prediction": {"spans": [{"text": "We will visit you in Cebu on December 20", "category": "LAW_ENFORCEMENT_FILES"}], "has_sensitive_info": true}}
+{"id": "test_078", "prediction": {"spans": [{"text": "night-shift", "category": "JOB_TITLE"}], "has_sensitive_info": true}}
+{"id": "test_079", "prediction": {"spans": [], "has_sensitive_info": false}}
+{"id": "test_080", "prediction": {"spans": [{"text": "G-5530", "category": "JOB_TITLE"}], "has_sensitive_info": true}}
+{"id": "test_081", "prediction": {"spans": [], "has_sensitive_info": false}}
+{"id": "test_082", "prediction": {"spans": [{"text": "linkedin.com/in/hiwot-bekele-data", "category": "SOCIAL_NETWORK_PROFILE"}], "has_sensitive_info": true}}
+{"id": "test_083", "prediction": {"spans": [{"text": "Thanh", "category": "PERSON_NAME"}, {"text": "555-1047", "category": "CELL_PHONE_NUMBER"}], "has_sensitive_info": true}}
+{"id": "test_084", "prediction": {"spans": [{"text": "laptop", "category": "WORK_CONTACT_INFORMATION"}, {"text": "Sony E-mount lenses", "category": "SECURITY_ACCESS_CODE"}], "has_sensitive_info": true}}
+{"id": "test_085", "prediction": {"spans": [{"text": "61 kg", "category": "WEIGHT"}], "has_sensitive_info": true}}
+{"id": "test_086", "prediction": {"spans": [], "has_sensitive_info": false}}
+{"id": "test_087", "prediction": {"spans": [], "has_sensitive_info": false}}
+{"id": "test_088", "prediction": {"spans": [], "has_sensitive_info": false}}
+{"id": "test_089", "prediction": {"spans": [], "has_sensitive_info": false}}
+{"id": "test_090", "prediction": {"spans": [{"text": "98118", "category": "ZIP_CODE_PLUS_4"}], "has_sensitive_info": true}}
+{"id": "test_091", "prediction": {"spans": [{"text": "Baraka", "category": "PERSON_NAME"}, {"text": "9", "category": "AGE"}], "has_sensitive_info": true}}
+{"id": "test_092", "prediction": {"spans": [], "has_sensitive_info": false}}
+{"id": "test_093", "prediction": {"spans": [], "has_sensitive_info": false}}
+{"id": "test_094", "prediction": {"spans": [{"text": "single", "category": "MARITAL_STATUS"}, {"text": "medical receptionist", "category": "JOB_TITLE"}], "has_sensitive_info": true}}
+{"id": "test_095", "prediction": {"spans": [{"text": "vegan", "category": "MEDICAL_HISTORY"}], "has_sensitive_info": true}}
+{"id": "test_096", "prediction": {"spans": [{"text": "Jomar Reyes", "category": "PERSON_NAME"}, {"text": "33", "category": "AGE"}], "has_sensitive_info": true}}
+{"id": "test_097", "prediction": {"spans": [], "has_sensitive_info": false}}
+{"id": "test_098", "prediction": {"spans": [{"text": "lactose intolerant", "category": "MEDICAL_HISTORY"}], "has_sensitive_info": true}}
+{"id": "test_099", "prediction": {"spans": [{"text": "Achola", "category": "MOTHERS_MAIDEN_NAME"}], "has_sensitive_info": true}}
+{"id": "test_100", "prediction": {"spans": [{"text": "P7720419", "category": "HEALTH_INSURANCE_ID"}], "has_sensitive_info": true}}
