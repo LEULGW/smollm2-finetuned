@@ -1,153 +1,130 @@
 
 import json
+from collections import Counter
 
-with open("test.jsonl", encoding="utf-8") as f:
-    test_data = [json.loads(line) for line in f if line.strip()]
+# 1. Load data
+def load(path):
+    with open(path, encoding="utf-8") as f:
+        return [json.loads(line) for line in f if line.strip()]
 
-with open("smollm2_predictions.jsonl", encoding="utf-8") as f:
-    predictions = [json.loads(line) for line in f if line.strip()]
+test = load("test.jsonl")
+predictions = load("smollm2_predictions.jsonl")
 
-text_tp = 0
-text_fp = 0
-text_fn = 0
+ids = [x["id"] for x in predictions]
+assert len(ids) == len(set(ids)), "Duplicate prediction IDs"
+assert len({x["id"] for x in test}) == len(test), "Duplicate test IDs"
 
-category_correct = 0
-category_total = 0
+lookup = {x["id"]: x.get("prediction") for x in predictions}
 
-boolean_correct = 0
-exact_matches = 0
+CATEGORIES = set("""
+PLACE_OF_BIRTH RACE HEIGHT MARITAL_STATUS COUNTRY_OF_CITIZENSHIP
+SHOPPING_BEHAVIOR ZIP_CODE_PLUS_4 NUMBER_OF_CHILDREN JOB_TITLE HOMETOWN
+INCOME_LEVEL OCCUPATION GENDER BIRTH_DATE PERSON_NAME AGE ONLINE_SCREEN_NAME
+RELIGION WEIGHT POLITICAL_AFFILIATION SEXUAL_PREFERENCE
+DOCUMENTATION_OF_GRIEVANCES SIGNED_PETITIONS SURVEY_ANSWERS
+EMAIL_ADDRESS IP_ADDRESS HOME_PHONE_NUMBER CELL_PHONE_NUMBER
+WORK_ADDRESS WORK_CONTACT_INFORMATION WORK_PHONE_NUMBER
+FAMILY_FRIEND_CONTACT_INFORMATION SOCIAL_NETWORK_PROFILE
+LAW_ENFORCEMENT_FILES MOTHERS_MAIDEN_NAME DRIVERS_LICENSE_NUMBER
+VEHICLE_REGISTRATION_NUMBER LICENSE_PLATE_NUMBER CREDIT_CARD_NUMBER
+CREDIT_SCORE FINANCIAL_ACCOUNT_NUMBER MEDICAL_HISTORY HOME_ADDRESS
+SOCIAL_SECURITY_NUMBER GPS_LOCATION SECURITY_ACCESS_CODE
+HEALTH_INSURANCE_ID PASSPORT_NUMBER
+""".split())
 
-successful = 0
-failed = 0
+# 2. Validate output
+def valid(p, prompt):
+    if not isinstance(p, dict):
+        return False
+    if set(p) != {"spans", "has_sensitive_info"}:
+        return False
+    if not isinstance(p["spans"], list):
+        return False
+    if type(p["has_sensitive_info"]) is not bool:
+        return False
+    if p["has_sensitive_info"] != bool(p["spans"]):
+        return False
 
-for example in test_data:
+    for s in p["spans"]:
+        if not isinstance(s, dict) or set(s) != {"text", "category"}:
+            return False
+        if not isinstance(s["text"], str) or not s["text"]:
+            return False
+        if s["text"] not in prompt:
+            return False
+        if not isinstance(s["category"], str) or s["category"] not in CATEGORIES:
+            return False
+    return True
 
-    prediction = None
+# 3. Metrics
+def metrics(tp, fp, fn):
+    p = tp / (tp + fp) if tp + fp else 0
+    r = tp / (tp + fn) if tp + fn else 0
+    f1 = 2 * p * r / (p + r) if p + r else 0
+    return p, r, f1
 
-    for item in predictions:
-        if item["id"] == example["id"]:
-            prediction = item["prediction"]
-            break
+text_tp = text_fp = text_fn = 0
+joint_tp = joint_fp = joint_fn = 0
+boolean_correct = exact_correct = valid_count = 0
 
-    if not isinstance(prediction, dict):
-        failed += 1
-        continue
+for x in test:
+    pred = lookup.get(x["id"])
+    ok = valid(pred, x["prompt"])
+    valid_count += int(ok)
 
-    if (
-        not isinstance(prediction.get("spans"), list)
-        or type(prediction.get("has_sensitive_info")) != bool
-    ):
-        failed += 1
-        continue
+    gold = x["spans"]
+    predicted = pred["spans"] if ok else []
 
-    if not all(
-        isinstance(span, dict)
-        and isinstance(span.get("text"), str)
-        and isinstance(span.get("category"), str)
-        for span in prediction["spans"]
-    ):
-        failed += 1
-        continue
+    # Text-only matching
+    gt = Counter(s["text"] for s in gold)
+    pt = Counter(s["text"] for s in predicted)
+    tp = sum((gt & pt).values())
 
-    successful += 1
+    text_tp += tp
+    text_fp += sum(pt.values()) - tp
+    text_fn += sum(gt.values()) - tp
 
-    gold_spans = example["spans"]
-    predicted_spans = prediction["spans"]
+    # Exact text + category matching
+    gj = Counter((s["text"], s["category"]) for s in gold)
+    pj = Counter((s["text"], s["category"]) for s in predicted)
+    tp = sum((gj & pj).values())
 
-    gold_texts = {span["text"] for span in gold_spans}
-    predicted_texts = {span["text"] for span in predicted_spans}
+    joint_tp += tp
+    joint_fp += sum(pj.values()) - tp
+    joint_fn += sum(gj.values()) - tp
 
-    matching_texts = gold_texts & predicted_texts
+    if ok:
+        bool_ok = pred["has_sensitive_info"] == x["has_sensitive_info"]
+        boolean_correct += int(bool_ok)
+        exact_correct += int(bool_ok and gj == pj)
 
-    text_tp += len(matching_texts)
-    text_fp += len(predicted_texts - gold_texts)
-    text_fn += len(gold_texts - predicted_texts)
+# 4. Results
+n = len(test)
+assert n > 0, "Empty test dataset"
 
-    gold_categories = {
-        span["text"]: span["category"] for span in gold_spans
-    }
+p, r, f1 = metrics(text_tp, text_fp, text_fn)
+jp, jr, jf1 = metrics(joint_tp, joint_fp, joint_fn)
+cat_acc = joint_tp / text_tp if text_tp else 0
 
-    predicted_categories = {
-        span["text"]: span["category"] for span in predicted_spans
-    }
+print("\n===== SMOLLM2 EVALUATION =====")
+print(f"Total prompts: {n}")
+print(f"Valid predictions: {valid_count}")
+print(f"Failed/null predictions: {n - valid_count}")
+print(f"Valid output rate: {valid_count/n:.2%}")
 
-    for text in matching_texts:
-        category_total += 1
+print("\n--- TEXT DETECTION ---")
+print(f"TP: {text_tp} | FP: {text_fp} | FN: {text_fn}")
+print(f"Precision: {p:.2%}")
+print(f"Recall: {r:.2%}")
+print(f"F1 Score: {f1:.2%}")
 
-        if gold_categories[text] == predicted_categories[text]:
-            category_correct += 1
+print("\n--- TEXT + CATEGORY ---")
+print(f"TP: {joint_tp} | FP: {joint_fp} | FN: {joint_fn}")
+print(f"Joint Precision: {jp:.2%}")
+print(f"Joint Recall: {jr:.2%}")
+print(f"Joint F1: {jf1:.2%}")
+print(f"Category Accuracy: {cat_acc:.2%}")
 
-    if prediction["has_sensitive_info"] == example["has_sensitive_info"]:
-        boolean_correct += 1
-
-    gold_pairs = {
-        (span["text"], span["category"]) for span in gold_spans
-    }
-
-    predicted_pairs = {
-        (span["text"], span["category"]) for span in predicted_spans
-    }
-
-    if (
-        gold_pairs == predicted_pairs
-        and prediction["has_sensitive_info"] == example["has_sensitive_info"]
-    ):
-        exact_matches += 1
-
-
-precision = (
-    text_tp / (text_tp + text_fp) * 100
-    if text_tp + text_fp else 0
-)
-
-recall = (
-    text_tp / (text_tp + text_fn) * 100
-    if text_tp + text_fn else 0
-)
-
-f1 = (
-    2 * precision * recall / (precision + recall)
-    if precision + recall else 0
-)
-
-category_accuracy = (
-    category_correct / category_total * 100
-    if category_total else 0
-)
-
-boolean_accuracy = (
-    boolean_correct / successful * 100
-    if successful else 0
-)
-
-exact_match_accuracy = (
-    exact_matches / successful * 100
-    if successful else 0
-)
-
-
-print("\n===== SMOLLM2 EVALUATION RESULTS =====")
-
-print(f"Total test cases: {len(test_data)}")
-print(f"Successful predictions: {successful}")
-print(f"Failed predictions: {failed}")
-
-print("\n--- Prompt-Level Evaluation ---")
-print(f"Correct has_sensitive_info predictions: {boolean_correct}/{successful}")
-print(f"Boolean Accuracy: {boolean_accuracy:.2f}%")
-print(f"Completely correct predictions: {exact_matches}/{successful}")
-print(f"Exact Match Accuracy: {exact_match_accuracy:.2f}%")
-
-print("\n--- Individual Span Evaluation ---")
-print(f"Total sensitive spans in correct answers: {text_tp + text_fn}")
-print(f"Total spans identified by SmolLM2: {text_tp + text_fp}")
-print(f"Correctly identified spans: {text_tp}")
-print(f"Incorrectly identified spans: {text_fp}")
-print(f"Sensitive spans SmolLM2 missed: {text_fn}")
-
-print(f"\nPrecision: {precision:.2f}%")
-print(f"Recall: {recall:.2f}%")
-print(f"F1 Score: {f1:.2f}%")
-
-print(f"\nCorrect category assignments: {category_correct}/{category_total}")
-print(f"Category Accuracy: {category_accuracy:.2f}%")
+print("\n--- PROMPT LEVEL ---")
+print(f"Boolean Accuracy: {boolean_correct/n:.2%}")
+print(f"Exact Match Accuracy: {exact_correct/n:.2%}")
